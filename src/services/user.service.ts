@@ -6,13 +6,13 @@ import { injectable } from 'tsyringe';
 class UserService {
     // private userRepository = new UserRepository();
     constructor(private readonly userRepository: UserRepository) {}
-    public createUser = async (reqBody: IUser) => {
+    public createUser = async (reqBody: IUser): Promise<IUser> => {
         return await this.userRepository.createUser(reqBody);
     };
-    public getUsers = async () => {
+    public getUsers = async (): Promise<IUser[]> => {
         return await this.userRepository.getUsers();
     };
-    public findOne = async (params: string) => {
+    public findOne = async (params: string): Promise<IUser | null> => {
         return await this.userRepository.findOne(params);
     };
 }

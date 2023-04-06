@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import express, { Application, Request, Response } from 'express';
 import mongoose, { ConnectOptions } from 'mongoose';
 import { userRouter } from './routes';
@@ -5,6 +6,7 @@ import compression from 'compression';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
+
 
 class App {
     public express: Application;

@@ -15,7 +15,7 @@ class UserRepository {
     }
 
     async findOne(params: string): Promise<IUser | null> {
-        return await this.db.findOne({ params });
+        return await this.db.findOne({ _id: params });
     }
 }
 

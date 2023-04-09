@@ -9,5 +9,6 @@ const userController = container.resolve(UserController);
 
 router.get('/', userController.getUsers);
 router.post('/', userController.createUser);
+router.get('/match/:userId', userController.matchUser);
 
 export { router as userRouter };

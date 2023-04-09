@@ -1,11 +1,14 @@
 import { Response, Request } from 'express';
 import { UserRepository } from '../datasource/repository';
-import { UserService } from '../services';
-import {injectable} from 'tsyringe'
+import { MatchService, UserService } from '../services';
+import { injectable } from 'tsyringe';
 
 @injectable()
 class UserController {
-    constructor(private readonly userService: UserService) {}
+    constructor(
+        private readonly userService: UserService,
+        private readonly matchService: MatchService
+    ) {}
     public createUser = async (req: Request, res: Response) => {
         try {
             let result = await this.userService.createUser(req.body);
@@ -22,6 +25,16 @@ class UserController {
         res.send({
             msg: result,
         });
+    };
+
+    public matchUser = async (req: Request, res: Response) => {
+        try {
+            let result = await this.matchService.findMatch(req.params.userId);
+            res.json({
+                msg: result,
+            });
+            this.matchService.resetTotalScore();
+        } catch (error) {}
     };
 }
 

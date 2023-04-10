@@ -16,7 +16,7 @@ class UserController {
                 msg: result,
             });
         } catch (error: any) {
-            throw error(error.message);
+            throw Error(error.message);
         }
     };
 
@@ -29,11 +29,15 @@ class UserController {
 
     public matchUser = async (req: Request, res: Response) => {
         try {
-            let result = await this.matchService.findMatch(req.params.userId);
+            let result = await this.matchService.processMatch(
+                req.params.userId
+            );
+
             res.json({
                 msg: result,
             });
             this.matchService.resetTotalScore();
+            this.matchService.clearResult();
         } catch (error) {}
     };
 }

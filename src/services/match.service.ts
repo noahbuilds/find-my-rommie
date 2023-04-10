@@ -14,16 +14,14 @@ class MatchService {
 
     public getUsers = async () => {
         this.usersToMatch = await this.userService.getUsers();
-        // console.log(this.usersToMatch.length)
     };
     public processMatch = async (userId: string) => {
-        this.usersToMatch = await this.userService.getUsers();
+        await this.getUsers();
 
         const currentUserProfile = await this.userService.findOne(userId);
-        const attributes = ['age', 'location', 'interests', 'education'];
+        const attributes = ['age', 'location', 'interests', 'state'];
         let startFrom = 0;
         let endAt = 30;
-
         if (!(endAt > this.usersToMatch!.length)) {
             this.matcher(currentUserProfile!, attributes, startFrom, endAt);
         } else {
@@ -84,7 +82,7 @@ class MatchService {
                     this.totalScore += Math.round(interestScore * 10);
                 } else if (attr === 'state') {
                     if (
-                        currentUserProfile!.stateOfOrigin ===
+                        currentUserProfile!.stateOfOrigin ==
                         this.usersToMatch![i].stateOfOrigin
                     ) {
                         this.totalScore += 10;

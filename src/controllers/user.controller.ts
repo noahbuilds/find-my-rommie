@@ -35,6 +35,7 @@ class UserController {
 
             res.json({
                 msg: result,
+                processed: this.matchService.processedData,
             });
             this.matchService.resetTotalScore();
             this.matchService.clearResult();

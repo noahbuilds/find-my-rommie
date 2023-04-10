@@ -8,21 +8,21 @@ class MatchService {
     totalScore: number = 0;
     attributes: Array<string> = ['age', 'location', 'interests', 'state'];
     result: any = [];
+    processedData: string = '';
 
-    constructor(private readonly userService: UserService) {
-        // this.getUsers();
-    }
+    constructor(private readonly userService: UserService) {}
 
     public getUsers = async () => {
         this.usersToMatch = await this.userService.getUsers();
         // console.log(this.usersToMatch.length)
     };
     public processMatch = async (userId: string) => {
-        this.getUsers();
+        this.usersToMatch = await this.userService.getUsers();
+
         const currentUserProfile = await this.userService.findOne(userId);
         const attributes = ['age', 'location', 'interests', 'education'];
         let startFrom = 0;
-        let endAt = 10;
+        let endAt = 30;
 
         if (!(endAt > this.usersToMatch!.length)) {
             this.matcher(currentUserProfile!, attributes, startFrom, endAt);
@@ -31,10 +31,13 @@ class MatchService {
             let endAt = this.usersToMatch?.length;
             this.matcher(currentUserProfile!, attributes, startFrom, endAt);
         }
-
+        this.getNumberOfDataProcessed(startFrom, endAt);
         return this.result;
     };
 
+    public getNumberOfDataProcessed = (startFrom: number, endAt: number) => {
+        this.processedData = `processed data from ${startFrom} - ${endAt}`;
+    };
     /**
      * name
      */
@@ -91,13 +94,28 @@ class MatchService {
                 }
             });
 
-            this.result.push(
-                `${currentUserProfile?.firstName} and ${
-                    this.usersToMatch![i].firstName
-                } compatibility score is ${
-                    this.totalScore
-                }/40 ran request for ${startFrom} - ${endAt}`
-            );
+            this.usersToMatch![i].compatibilityScore = this.totalScore + '/40';
+            let {
+                firstName,
+                lastName,
+                interests,
+                level,
+                age,
+                stateOfOrigin,
+                location,
+                compatibilityScore,
+            } = this.usersToMatch![i];
+
+            this.result.push({
+                firstName,
+                lastName,
+                interests,
+                level,
+                age,
+                stateOfOrigin,
+                location,
+                compatibilityScore,
+            });
 
             this.resetTotalScore();
         }
@@ -109,10 +127,7 @@ class MatchService {
 
     public clearResult = () => {
         this.result = [];
-        // this.usersToMatch = []
     };
 }
 
 export { MatchService };
-// Output the total score
-// console.log(`The total compatibility score is ${totalScore}/40`);

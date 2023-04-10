@@ -92,7 +92,8 @@ class MatchService {
                 }
             });
 
-            this.usersToMatch![i].compatibilityScore = this.totalScore + '/40';
+            this.usersToMatch![i].compatibilityScore =
+                (this.totalScore / 40) * 100 + '%';
             let {
                 firstName,
                 lastName,

@@ -12,7 +12,7 @@ class MatchService {
 
     constructor(private readonly userService: UserService) {}
 
-    public getUsers = async () => {
+    public getUsers = async ():Promise<void> => {
         this.usersToMatch = await this.userService.getUsers();
     };
     public processMatch = async (userId: string) => {
@@ -33,7 +33,7 @@ class MatchService {
         return this.result;
     };
 
-    public getNumberOfDataProcessed = (startFrom: number, endAt: number) => {
+    public getNumberOfDataProcessed = (startFrom: number, endAt: number):void => {
         this.processedData = `processed data from ${startFrom} - ${endAt}`;
     };
     /**
@@ -45,7 +45,7 @@ class MatchService {
         attributes: string[],
         startFrom: number,
         endAt: number | undefined
-    ) {
+    ):void {
         for (let i = startFrom; i < endAt!; i++) {
             attributes.forEach((attr) => {
                 if (attr === 'age') {
@@ -120,11 +120,11 @@ class MatchService {
         }
     }
 
-    public resetTotalScore = () => {
+    public resetTotalScore = ():void => {
         this.totalScore = 0;
     };
 
-    public clearResult = () => {
+    public clearResult = ():void => {
         this.result = [];
     };
 }

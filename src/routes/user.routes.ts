@@ -7,8 +7,7 @@ const router: Router = Router();
 
 const userController = container.resolve(UserController);
 
-router.get('/', userController.getUsers);
-router.post('/', userController.createUser);
+router.get('/', userController.getUsers).post('/', userController.createUser);
 router.get('/match/:userId', userController.matchUser);
 
 export { router as userRouter };

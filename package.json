@@ -10,7 +10,7 @@
     "start": "node dist/index.js",
     "postinstall": "npm run build"
   },
-  "type": "module",
+  "type": "commonjs",
   "author": "noahbuilds",
   "license": "ISC",
   "dependencies": {

@@ -14,4 +14,27 @@ export interface IUser {
     createdAt: Date;
     updatedAt: Date;
     compatibilityScore: string;
+    bio: string;
+    socialStats: SocialStats;
+    roomTemperature: RoomTemperature;
+    visitorTolerance: VisitorTolerance;
+}
+
+export enum SocialStats {
+    extrovert= 'extrovert',
+    ambivert = 'ambivert',
+    introvert= 'introvert',
+}
+export enum VisitorTolerance {
+    few='few',
+    occassionally='occassionally',
+    often='often',
+}
+
+export enum RoomTemperature{
+    cold='cold',
+    cool='cool',
+    neutral='neutral',
+    warm= 'warm',
+    hot='hot'
 }

@@ -7,16 +7,15 @@ import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 
-
 class App {
     public express: Application;
     public port: number;
     private mongoURI: string;
 
-    constructor(port: number, mongoURI: string ) {
+    constructor(port: number, mongoURI: string) {
         this.express = express();
         this.port = port;
-        this.mongoURI = mongoURI
+        this.mongoURI = mongoURI;
         this.initializeDatabaseConnection();
         this.initializeMiddleware();
         this.initializeErrorHandling();
@@ -29,9 +28,7 @@ class App {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             } as ConnectOptions);
-            return console.log(
-                `Successfully connected to ${this.mongoURI}`
-            );
+            return console.log(`Successfully connected to ${this.mongoURI}`);
         } catch (error) {
             console.log('Error connecting to database: ', error);
             return process.exit(1);

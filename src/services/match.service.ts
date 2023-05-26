@@ -12,8 +12,13 @@ class MatchService {
 
     constructor(private readonly userService: UserService) {}
 
-    public getUsers = async ():Promise<void> => {
+    public getUsers = async (): Promise<void> => {
         this.usersToMatch = await this.userService.getUsers();
+    };
+    public getUser = async (id: string): Promise<void> => {
+        const userToMatch = await this.userService.findOne(id);
+        this.usersToMatch = [userToMatch!];
+        // console.log(this.usersToMatch);
     };
     public processMatch = async (userId: string) => {
         await this.getUsers();
@@ -33,19 +38,57 @@ class MatchService {
         return this.result;
     };
 
-    public getNumberOfDataProcessed = (startFrom: number, endAt: number):void => {
+    public getNumberOfDataProcessed = (
+        startFrom: number,
+        endAt: number
+    ): void => {
         this.processedData = `processed data from ${startFrom} - ${endAt}`;
     };
     /**
      * name
      */
 
+    public matchSingleProfile = async (
+        userToMatchId: string,
+        currentUserId: string
+    ) => {
+        try {
+            await this.getUser(userToMatchId);
+            console.log(this.usersToMatch);
+            const currentUserProfile = await this.userService.findOne(
+                currentUserId
+            );
+            const attributes = [
+                'age',
+                'location',
+                'interests',
+                'state',
+                'socialStats',
+            ];
+            let startFrom = 0;
+            let endAt = 30;
+            console.log(this.usersToMatch);
+            if (!(endAt > this.usersToMatch!.length)) {
+                this.matcher(currentUserProfile!, attributes, startFrom, endAt);
+            } else {
+                let startFrom = 0;
+                let endAt = this.usersToMatch?.length;
+                this.matcher(currentUserProfile!, attributes, startFrom, endAt);
+            }
+            this.getNumberOfDataProcessed(startFrom, endAt);
+            console.log(this.result);
+            return this.result;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     public matcher(
         currentUserProfile: IUser,
         attributes: string[],
         startFrom: number,
         endAt: number | undefined
-    ):void {
+    ): void {
         for (let i = startFrom; i < endAt!; i++) {
             attributes.forEach((attr) => {
                 if (attr === 'age') {
@@ -89,11 +132,20 @@ class MatchService {
                     } else {
                         this.totalScore += 1;
                     }
+                } else if (attr === 'socialStats') {
+                    if (
+                        currentUserProfile!.socialStats ==
+                        this.usersToMatch![i].socialStats
+                    ) {
+                        this.totalScore += 10;
+                    } else {
+                        this.totalScore += 1;
+                    }
                 }
             });
 
             this.usersToMatch![i].compatibilityScore =
-                (this.totalScore / 40) * 100 + '%';
+                (this.totalScore / (attributes.length * 10)) * 100 + '%';
             let {
                 firstName,
                 lastName,
@@ -103,6 +155,8 @@ class MatchService {
                 stateOfOrigin,
                 location,
                 compatibilityScore,
+                bio,
+                email,
             } = this.usersToMatch![i];
 
             this.result.push({
@@ -113,19 +167,25 @@ class MatchService {
                 age,
                 stateOfOrigin,
                 location,
+                bio,
                 compatibilityScore,
+                email,
             });
 
             this.resetTotalScore();
         }
     }
 
-    public resetTotalScore = ():void => {
+    public resetTotalScore = (): void => {
         this.totalScore = 0;
     };
 
-    public clearResult = ():void => {
+    public clearResult = (): void => {
         this.result = [];
+    };
+
+    public findRoommie = async (params: any) => {
+        return await this.userService.findRoommie(params);
     };
 }
 

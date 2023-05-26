@@ -15,6 +15,13 @@ class UserService {
     public findOne = async (params: string): Promise<IUser | null> => {
         return await this.userRepository.findOne(params);
     };
+    public findEmail = async (params: string): Promise<IUser | null> => {
+        return await this.userRepository.findEmail(params);
+    };
+    public findRoommie = async (option: any): Promise<IUser[] | []> => {
+        const result = await this.userRepository.findRoommie(option);
+        return result;
+    };
 }
 
 export { UserService };

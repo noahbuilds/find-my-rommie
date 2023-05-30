@@ -17,13 +17,11 @@ class UserRepository {
     async findOne(params: string): Promise<IUser | null> {
         return await this.db.findOne({ _id: params });
     }
-     
-    async findEmail(params:string) : Promise<IUser | null> {
-        return await this.db.findOne({ email: params})
+
+    async findEmail(params: string): Promise<IUser | null> {
+        return await this.db.findOne({ email: params });
     }
-    public findRoommie = async (
-        option: any
-    ): Promise<IUser[] | []> => {
+    public findRoommie = async (option: any): Promise<IUser[] | []> => {
         // console.log();
 
         const result = await this.db.find(option);

@@ -1,4 +1,3 @@
-
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import configuration from '../configs/configs';
@@ -15,7 +14,7 @@ const isLoggedIn = async (req: any, res: Response, next: NextFunction) => {
         next();
     } catch (error: any) {
         // console.log(error)
-        res.json({
+        res.status(401).json({
             err: error,
             msg: error.message,
         });

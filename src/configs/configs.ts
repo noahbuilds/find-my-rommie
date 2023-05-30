@@ -3,7 +3,6 @@ import path from 'path';
 
 dotenv.config({ path: path.join(__dirname, '../../.env') });
 
-console.log(dotenv.config({ path: path.join(__dirname, '../../.env') + "i am here" }));
 
 
 const configuration = {

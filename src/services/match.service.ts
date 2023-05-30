@@ -145,7 +145,9 @@ class MatchService {
             });
 
             this.usersToMatch![i].compatibilityScore =
-                (this.totalScore / (attributes.length * 10)) * 100 + '%';
+                ((this.totalScore / (attributes.length * 10)) * 100).toFixed(
+                    2
+                ) + '%';
             let {
                 firstName,
                 lastName,
@@ -157,6 +159,9 @@ class MatchService {
                 compatibilityScore,
                 bio,
                 email,
+                visitorTolerance,
+                roomTemperature,
+                socialStats,
             } = this.usersToMatch![i];
 
             this.result.push({
@@ -170,6 +175,9 @@ class MatchService {
                 bio,
                 compatibilityScore,
                 email,
+                visitorTolerance,
+                roomTemperature,
+                socialStats,
             });
 
             this.resetTotalScore();

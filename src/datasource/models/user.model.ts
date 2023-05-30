@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema<IUser>(
         phoneNumber: { type: String, required: true },
         stateOfOrigin: { type: String },
         age: { type: Number, required: true },
-        interests: { type: [String] },
+        interests: { type: [String], default: []},
         level: { type: Number, required: true },
         location: { type: String, required: true },
         bio: { type: String, required: true },

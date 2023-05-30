@@ -20,21 +20,28 @@ export interface IUser {
     visitorTolerance: VisitorTolerance;
 }
 
-export enum SocialStats {
-    extrovert= 'extrovert',
-    ambivert = 'ambivert',
-    introvert= 'introvert',
-}
-export enum VisitorTolerance {
-    few='few',
-    occassionally='occassionally',
-    often='often',
+export interface ILogin {
+    email: string;
+    password: string;
 }
 
-export enum RoomTemperature{
-    cold='cold',
-    cool='cool',
-    neutral='neutral',
-    warm= 'warm',
-    hot='hot'
+export enum SocialStats {
+    extrovert = 'extrovert',
+    ambivert = 'ambivert',
+    introvert = 'introvert',
 }
+export enum VisitorTolerance {
+    few = 'few',
+    occassionally = 'occassionally',
+    often = 'often',
+}
+
+export enum RoomTemperature {
+    cold = 'cold',
+    cool = 'cool',
+    neutral = 'neutral',
+    warm = 'warm',
+    hot = 'hot',
+}
+
+export enum PreferredHostel {}

@@ -2,15 +2,16 @@ import { Router } from 'express';
 import { UserController } from '../controllers';
 
 import { container } from 'tsyringe';
+import { isLoggedIn } from '../middlewares/auth';
 
 const router: Router = Router();
 
 const userController = container.resolve(UserController);
 
 router
-    .get('/', userController.getUsers)
+    .get('/', isLoggedIn, userController.getUsers)
     .post('/', userController.createUser)
-    .get('/match/:userId', userController.matchUser)
+    .get('/match/', isLoggedIn, userController.matchUser)
     .get(
         '/match/single/:userToMatchId/:currentUserId',
         userController.matchSingleProfile

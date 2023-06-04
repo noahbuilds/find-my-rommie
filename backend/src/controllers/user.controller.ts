@@ -111,8 +111,36 @@ class UserController {
                 userId,
                 req.body
             );
+            const {
+                firstName,
+                lastName,
+                updatedAt,
+                bio,
+                course,
+                genderinclusion,
+                phoneNumber,
+                roomTemperature,
+                country,
+                interests,
+                sportChoice,
+                socialStats,
+            } = result as IUser;
+            const data = {
+                firstName,
+                lastName,
+                updatedAt,
+                bio,
+                course,
+                country,
+                genderinclusion,
+                phoneNumber,
+                roomTemperature,
+                interests,
+                socialStats,
+                sportChoice,
+            };
             res.status(200).send({
-                msg: result,
+                msg: data,
             });
         } catch (error) {
             res.status(500);
@@ -171,8 +199,12 @@ class UserController {
             const userId = req.user.userId;
             const result = await this.userService.findOne(userId);
             // console.log(result);
+            const { firstName, lastName, email, _id } = result as IUser;
             return res.status(200).send({
-                result,
+                firstName,
+                lastName,
+                email,
+                _id,
             });
         } catch (error) {
             return res.status(500).send(error);

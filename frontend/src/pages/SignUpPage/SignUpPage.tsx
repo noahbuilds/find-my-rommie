@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const SignUpPage = () => {
-    const baseUrl = `https://room-my-rommie-service.onrender.com/api/v1/user/signup`;
+    const baseUrl = `https://room-my-rommie-service.onrender.com/api/v1/user/`;
     const navigate = useNavigate();
     const initialFormData = Object.freeze({
         email: '',

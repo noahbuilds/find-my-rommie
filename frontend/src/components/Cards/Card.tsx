@@ -41,7 +41,7 @@ const Card = (props: any) => {
 
                 <div className="card-body">
                     <div className="d-flex justify-content-between align-content-center align-items-center">
-                        <h5 className="card-title text-uppercase fw-bolder" style={{fontSize: '12px'}}>
+                        <h5 className="card-title text-uppercase text-white fw-bolder" style={{fontSize: '12px'}}>
                             {props.user.firstName}
                         </h5>
                         <span className=" badge badge-primary text-info">

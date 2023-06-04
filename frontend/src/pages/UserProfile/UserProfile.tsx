@@ -61,7 +61,7 @@ const UserProfile = () => {
         }
     };
 
-    const baseUrl: string  = process.env.BASE_API!; 
+    const baseUrl: string  ='https://room-my-rommie-service.onrender.com/api/v1/user/'; 
 
     useEffect(() => {
         fetchUserData();

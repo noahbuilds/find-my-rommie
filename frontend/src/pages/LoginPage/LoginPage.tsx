@@ -6,8 +6,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 const LoginPage = () => {
-    const baseUrl = `${process.env.BASE_API}+login`;
+    const baseUrl = `https://room-my-rommie-service.onrender.com/api/v1/user/login`;
     const navigate = useNavigate();
     let email = '';
     let password = '';

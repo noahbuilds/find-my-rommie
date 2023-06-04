@@ -16,7 +16,7 @@ import { useNavigate, redirect } from 'react-router-dom';
 const Dashboard = () => {
     const navigate = useNavigate();
     const loggedInUserId = localStorage.getItem('user');
-    const baseUrl = process.env.BASE_API;
+    const baseUrl = 'https://room-my-rommie-service.onrender.com/api/v1/user/';
     const [loggedInUser, setloggedInUser]: any = useState([]);
     const [matchResult, setMatchResult] = useState([]);
     const [view, setView] = useState('card');

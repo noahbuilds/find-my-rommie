@@ -1,0 +1,22 @@
+.button-wrapper{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    flex-wrap: wrap;
+}
+
+.button-wrapper button{
+    padding: 15px;
+    width: 45%;
+}
+
+.button-wrapper button:hover{
+    cursor: pointer;
+}
+
+.card-wrapper{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+

@@ -1,0 +1,39 @@
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    /* border-width: 1px; */
+}
+
+.form-body {
+    padding: 30px;
+    border: 200px;
+    border: solid;
+    margin: 5px;
+    width: 400px;
+}
+
+.form-body input {
+    margin-bottom: 30px;
+    padding: 10px;
+    width: 370px;
+}
+
+.login-button {
+    display: flex;
+    justify-content: center;
+}
+
+.login-button button {
+    padding: 9px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 400px;
+}
+
+.login-button button:hover {
+    background-color: rgb(41, 41, 41);
+    cursor: pointer;
+}

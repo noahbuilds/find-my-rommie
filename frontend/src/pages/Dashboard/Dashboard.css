@@ -1,0 +1,12 @@
+
+
+.profile-photo{
+    border-radius: 50%;
+    background: #fff;
+    width: fit-content;
+    height: fit-content;
+}
+.bio {
+    max-height: 200px;
+    overflow-y: scroll;
+}

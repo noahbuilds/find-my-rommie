@@ -107,10 +107,7 @@ class UserController {
         // console.log(object);
 
         try {
-            const result = await this.userService.updateProfile(
-                userId,
-                req.body
-            );
+            const data = await this.userService.updateProfile(userId, req.body);
             const {
                 firstName,
                 lastName,
@@ -124,8 +121,8 @@ class UserController {
                 interests,
                 sportChoice,
                 socialStats,
-            } = result as IUser;
-            const data = {
+            } = data as IUser;
+            const result = {
                 firstName,
                 lastName,
                 updatedAt,
@@ -140,7 +137,7 @@ class UserController {
                 sportChoice,
             };
             res.status(200).send({
-                msg: data,
+                msg: result,
             });
         } catch (error) {
             res.status(500);

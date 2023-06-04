@@ -194,14 +194,41 @@ class UserController {
     public getWhoIam = async (req: any, res: Response) => {
         try {
             const userId = req.user.userId;
-            const result = await this.userService.findOne(userId);
+            const data = await this.userService.findOne(userId);
             // console.log(result);
-            const { firstName, lastName, email, _id } = result as IUser;
-            return res.status(200).send({
+
+            const {
                 firstName,
                 lastName,
-                email,
+                updatedAt,
+                bio,
+                course,
+                genderinclusion,
+                phoneNumber,
+                roomTemperature,
+                country,
+                interests,
+                sportChoice,
+                socialStats,
                 _id,
+            } = data as IUser;
+            const result = {
+                _id,
+                firstName,
+                lastName,
+                updatedAt,
+                bio,
+                course,
+                country,
+                genderinclusion,
+                phoneNumber,
+                roomTemperature,
+                interests,
+                socialStats,
+                sportChoice,
+            };
+            res.status(200).send({
+                msg: result,
             });
         } catch (error) {
             return res.status(500).send(error);

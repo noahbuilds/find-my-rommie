@@ -9,12 +9,12 @@ const NavBar = (props: any) => {
     localStorage.removeItem("token");
     navigate("/");
   };
-  const showDropDown = () => {
+  const showCollapse = () => {
     document.getElementById("mainNavItems")?.classList.toggle("collapse");
   };
   return (
     <>
-      <nav className="navbar nav  spnav navbar-expand-lg navbar-dark  ">
+      <nav className="navbar nav  spnav navbar-expand-lg navbar-dark bg-daek ">
         <a className="navbar-brand" href="/">
           {/* <img src="/assets/RFA (2).png"  height="50"/> */}
         </a>
@@ -26,12 +26,12 @@ const NavBar = (props: any) => {
           aria-controls="mainNavItems"
           aria-label="Toggle main menu"
           aria-expanded="false"
-          onClick={showDropDown}
+          onClick={showCollapse}
         >
           <i className="fa fa-bars"></i>
         </button>
         <div
-          className={` ${showDropDown} blurred   navbar-collapse ml-auto`}
+          className={` collapse blurred   navbar-collapse ml-auto`}
           id="mainNavItems"
         >
           <div className="ml-auto navbar-nav nav">

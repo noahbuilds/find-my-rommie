@@ -29,7 +29,7 @@ class App {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             } as ConnectOptions);
-            return console.log(`Successfully connected to ${process.env.MONGO_URI!}`);
+            return console.log(`Successfully connected to db`);
         } catch (error) {
             console.log('Error connecting to database: ', error);
             return process.exit(1);

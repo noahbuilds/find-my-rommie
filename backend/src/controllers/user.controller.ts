@@ -170,7 +170,7 @@ class UserController {
         try {
             const userId = req.user.userId;
             const result = await this.userService.findOne(userId);
-            console.log(result);
+            // console.log(result);
             return res.status(200).send({
                 result,
             });

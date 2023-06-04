@@ -12,7 +12,7 @@ import NavBar from '../../components/NavBar/NavBar';
 import { render } from '@testing-library/react';
 import App from '../../App';
 const Home = () => {
-    const baseUrl = `http://localhost:2000/api/v1/user/`;
+    const baseUrl = `https://room-my-rommie-service.onrender.com/api/v1/user/`;
 
     useEffect(()=>{
 

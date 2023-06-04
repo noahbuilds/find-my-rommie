@@ -15,7 +15,12 @@ const LoginPage = () => {
   // todo: login process state
 
   const loginUser = async () => {
-    setProcessingLogin(true)
+    setProcessingLogin(true);
+    if (!email.includes("@veritas.edu.ng")) {
+      toast("Veritas email only");
+      setProcessingLogin(false);
+      return;
+    }
     try {
       const response = await axios.post(baseUrl, { email, password });
       // console.log(response);
@@ -24,16 +29,16 @@ const LoginPage = () => {
         localStorage.setItem("token", response.data);
         document.cookie = `${response.data}`;
         // console.log(response);
-        setProcessingLogin(false)
+        setProcessingLogin(false);
         navigate("/dashboard");
       } else {
         navigate("/login");
-        setProcessingLogin(false)
+        setProcessingLogin(false);
       }
     } catch (error: any) {
       toast(error.response.data.msg);
       // console.log(error.response.data.msg)
-      setProcessingLogin(false)
+      setProcessingLogin(false);
     }
   };
   // }, [])

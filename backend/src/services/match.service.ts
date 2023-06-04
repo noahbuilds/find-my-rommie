@@ -59,11 +59,11 @@ class MatchService {
                 currentUserId
             );
             const attributes = [
-                'age',
                 'location',
                 'interests',
-                'state',
                 'socialStats',
+                'course',
+                'visitorTolerance',
             ];
             let startFrom = 0;
             let endAt = 30;
@@ -141,6 +141,51 @@ class MatchService {
                     } else {
                         this.totalScore += 1;
                     }
+                } else if (attr === 'roomTemperature') {
+                    if (
+                        currentUserProfile!.roomTemperature ==
+                        this.usersToMatch![i].roomTemperature
+                    ) {
+                        this.totalScore += 10;
+                    } else {
+                        this.totalScore += 1;
+                    }
+                } else if (attr === 'visitorTolerance') {
+                    if (
+                        currentUserProfile!.visitorTolerance ==
+                        this.usersToMatch![i].visitorTolerance
+                    ) {
+                        this.totalScore += 10;
+                    } else {
+                        this.totalScore += 1;
+                    }
+                } else if (attr === 'course') {
+                    if (
+                        currentUserProfile!.course ==
+                        this.usersToMatch![i].course
+                    ) {
+                        this.totalScore += 10;
+                    } else {
+                        this.totalScore += 1;
+                    }
+                } else if (attr === 'campusBudget') {
+                    if (
+                        currentUserProfile!.campusBudget ==
+                        this.usersToMatch![i].campusBudget
+                    ) {
+                        this.totalScore += 10;
+                    } else {
+                        this.totalScore += 1;
+                    }
+                } else if (attr === 'campusPreference') {
+                    if (
+                        currentUserProfile!.campusPreference ==
+                        this.usersToMatch![i].campusPreference
+                    ) {
+                        this.totalScore += 10;
+                    } else {
+                        this.totalScore += 1;
+                    }
                 }
             });
 
@@ -163,7 +208,7 @@ class MatchService {
                 roomTemperature,
                 socialStats,
                 campusPreference,
-                campusBudget
+                campusBudget,
             } = this.usersToMatch![i];
 
             this.result.push({
@@ -181,7 +226,7 @@ class MatchService {
                 roomTemperature,
                 socialStats,
                 campusPreference,
-                campusBudget
+                campusBudget,
             });
 
             this.resetTotalScore();

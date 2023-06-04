@@ -23,7 +23,7 @@ const LoginPage = () => {
         // localStorage
         localStorage.setItem("token", response.data);
         document.cookie = `${response.data}`;
-        console.log(response);
+        // console.log(response);
         setProcessingLogin(false)
         navigate("/dashboard");
       } else {

@@ -35,7 +35,7 @@ const SignUpPage = () => {
 
   const doSignUp = async (formData: any) => {
     setProcessingSignUp(true);
-    if (!formData.email.includes("@veritas.edu.ng")) {
+    if (!formData.email.includes("veritas.edu.ng")) {
       toast("Veritas email only");
       setProcessingSignUp(false);
       return;

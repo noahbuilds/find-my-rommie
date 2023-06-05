@@ -16,7 +16,7 @@ const LoginPage = () => {
 
   const loginUser = async () => {
     setProcessingLogin(true);
-    if (!email.includes("@veritas.edu.ng")) {
+    if (!email.includes("veritas.edu.ng")) {
       toast("Veritas email only");
       setProcessingLogin(false);
       return;

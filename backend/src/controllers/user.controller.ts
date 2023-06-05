@@ -32,11 +32,11 @@ class UserController {
             }
 
             const result = await this.userService.createUser(req.body);
-            res.status(201).send({
+            return res.status(201).send({
                 msg: result,
             });
         } catch (error: any) {
-            res.status(500).send({
+            return res.status(500).send({
                 error,
             });
             // throw Error(error.message);
@@ -136,11 +136,11 @@ class UserController {
                 socialStats,
                 sportChoice,
             };
-            res.status(200).send({
+            return res.status(200).send({
                 msg: result,
             });
         } catch (error) {
-            res.status(500);
+            return res.status(500);
         }
     };
 

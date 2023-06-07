@@ -3,9 +3,7 @@ import Card from "../Cards/Card";
 import axios from "axios";
 import "./Body.css";
 
-const baseUrl =
-  "http://localhost:2000/api/v1/user/" ||
-  "https://room-my-rommie-service.onrender.com/api/v1/user/";
+const baseUrl = "https://room-my-rommie-service.onrender.com/api/v1/user/";
 
 const Body = () => {
   const [users, setUsers] = useState([]);

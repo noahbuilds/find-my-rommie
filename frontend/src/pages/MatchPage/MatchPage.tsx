@@ -9,9 +9,7 @@ let matchResult: any = null;
 const MatchPage = () => {
   const params = useParams();
   const userToMatchId = params.id;
-  const baseUrl =
-    "http://localhost:2000/api/v1/user/" ||
-    "https://room-my-rommie-service.onrender.com/api/v1/user/";
+  const baseUrl = "https://room-my-rommie-service.onrender.com/api/v1/user/";
   const loggedInUserId = localStorage.getItem("user");
 
   const matchProfiles = async () => {

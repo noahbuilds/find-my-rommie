@@ -17,9 +17,7 @@ import { IUser } from "../../shared/interface/user";
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const baseUrl =
-    "http://localhost:2000/api/v1/user/" ||
-    "https://room-my-rommie-service.onrender.com/api/v1/user/";
+  const baseUrl = "https://room-my-rommie-service.onrender.com/api/v1/user/";
   const [loggedInUser, setloggedInUser] = useState<any>({});
   const [matchResult, setMatchResult] = useState([]);
   const [view, setView] = useState("card");

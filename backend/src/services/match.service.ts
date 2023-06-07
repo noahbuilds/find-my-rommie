@@ -209,6 +209,7 @@ class MatchService {
                 socialStats,
                 campusPreference,
                 campusBudget,
+                image,
             } = this.usersToMatch![i];
 
             this.result.push({
@@ -227,6 +228,7 @@ class MatchService {
                 socialStats,
                 campusPreference,
                 campusBudget,
+                image
             });
 
             this.resetTotalScore();

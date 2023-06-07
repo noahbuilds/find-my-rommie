@@ -10,14 +10,15 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import NavBar from "../../components/NavBar/NavBar";
 import { useNavigate, redirect } from "react-router-dom";
+import { IUser } from "../../shared/interface/user";
 
 // let matchResult: any = null;
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const loggedInUserId = localStorage.getItem("user");
+
   const baseUrl = "https://room-my-rommie-service.onrender.com/api/v1/user/";
-  const [loggedInUser, setloggedInUser]: any = useState([]);
+  const [loggedInUser, setloggedInUser] = useState<any>({});
   const [matchResult, setMatchResult] = useState([]);
   const [view, setView] = useState("card");
 
@@ -31,15 +32,16 @@ const Dashboard = () => {
     //         );
     //     }
     // };
-    // const fetchLoggedInUserData = async () => {
-    //     const config = {
-    //         headers: {
-    //             'auth-token': localStorage.getItem('token'),
-    //         },
-    //     };
-    //     const response = await axios.get(baseUrl, config);
-    //     setloggedInUser(response.data.msg);
-    // };
+    const fetchLoggedInUserData = async () => {
+      const config = {
+        headers: {
+          "auth-token": localStorage.getItem("token"),
+        },
+      };
+      const response = await axios.get(baseUrl + "find/whoami", config);
+      setloggedInUser(response.data.result);
+      console.log(response.data.result);
+    };
 
     const matchProfiles = async () => {
       // checkIfLoggedIn();
@@ -64,7 +66,7 @@ const Dashboard = () => {
       // console.log('no result');
     };
 
-    // fetchLoggedInUserData();
+    fetchLoggedInUserData();
     matchProfiles();
   }, []);
 
@@ -91,8 +93,9 @@ const Dashboard = () => {
         >
           <img
             src={
-                
-                `https://api.dicebear.com/6.x/lorelei/svg?seed=${loggedInUser._id}`
+              loggedInUser
+                ? loggedInUser.image
+                : `https://api.dicebear.com/6.x/lorelei/svg?seed=${loggedInUser?.result.firstName}`
             }
             alt="img"
             style={{ height: "150px", width: "140px" }}
@@ -122,9 +125,9 @@ const Dashboard = () => {
           using the contact information they listed.
         </p>
 
-        <button className="btn btn-sm btn-outline-dark" onClick={changeView}>
+        {/* <button className="btn btn-sm btn-outline-dark" onClick={changeView}>
           Change view
-        </button>
+        </button> */}
 
         {view === "table" ? (
           <div className="px-5  pb-5">

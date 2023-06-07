@@ -68,7 +68,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     fetchUserData();
-  }, [userProfile.result.image]);
+  }, []);
 
   let interestsArray: any[] = [];
   const activities = [

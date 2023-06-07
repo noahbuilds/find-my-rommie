@@ -58,7 +58,7 @@ class App {
         this.express.use(
             '/public/uploads',
             isLoggedIn,
-            express.static('uploads')
+            express.static('public/uploads')
         );
     }
 

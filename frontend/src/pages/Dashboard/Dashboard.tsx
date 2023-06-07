@@ -90,7 +90,10 @@ const Dashboard = () => {
           style={{ marginTop: "7%" }}
         >
           <img
-            src={`https://api.dicebear.com/6.x/lorelei/svg?seed=${loggedInUser._id}`}
+            src={
+                
+                `https://api.dicebear.com/6.x/lorelei/svg?seed=${loggedInUser._id}`
+            }
             alt="img"
             style={{ height: "150px", width: "140px" }}
             className="profile-photo"

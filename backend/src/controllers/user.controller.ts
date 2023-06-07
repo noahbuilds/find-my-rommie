@@ -196,39 +196,41 @@ class UserController {
     public getWhoIam = async (req: any, res: Response) => {
         try {
             const userId = req.user.userId;
-            const result = await this.userService.findOne(userId);
+            const data = await this.userService.findOne(userId);
             // console.log(result);
 
-            // const {
-            //     firstName,
-            //     lastName,
-            //     updatedAt,
-            //     bio,
-            //     course,
-            //     genderinclusion,
-            //     phoneNumber,
-            //     roomTemperature,
-            //     country,
-            //     interests,
-            //     sportChoice,
-            //     socialStats,
-            //     _id,
-            // } = data as IUser;
-            // const result = {
-            //     _id,
-            //     firstName,
-            //     lastName,
-            //     updatedAt,
-            //     bio,
-            //     course,
-            //     country,
-            //     genderinclusion,
-            //     phoneNumber,
-            //     roomTemperature,
-            //     interests,
-            //     socialStats,
-            //     sportChoice,
-            // };
+            const {
+                firstName,
+                lastName,
+                updatedAt,
+                bio,
+                course,
+                genderinclusion,
+                phoneNumber,
+                roomTemperature,
+                country,
+                interests,
+                sportChoice,
+                socialStats,
+                _id,
+                image,
+            } = data as IUser;
+            const result = {
+                _id,
+                firstName,
+                lastName,
+                updatedAt,
+                bio,
+                course,
+                country,
+                genderinclusion,
+                phoneNumber,
+                roomTemperature,
+                interests,
+                socialStats,
+                sportChoice,
+                image,
+            };
             res.status(200).send({
                 result,
             });

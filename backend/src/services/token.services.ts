@@ -4,7 +4,7 @@ import configuration from '../configs/configs';
 class TokenService {
     constructor() {}
 
-    public assignToken = (user: any):string => {
+    public assignToken = (user: any): string => {
         // try {
 
         // } catch (error) {

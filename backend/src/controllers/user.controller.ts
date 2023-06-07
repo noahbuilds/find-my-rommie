@@ -8,6 +8,7 @@ import {
 } from '../services';
 import { injectable } from 'tsyringe';
 import { IUser } from '../datasource/interfaces/user';
+import multer from 'multer';
 
 @injectable()
 class UserController {
@@ -233,6 +234,23 @@ class UserController {
         } catch (error) {
             return res.status(500).send(error);
         }
+    };
+
+    public uploadFile = async (req: any, res: Response) => {
+        console.log(req.user);
+        const file = req.file;
+        if (!file) return res.status(400).send('No image in the request');
+        const fileName = file.filename;
+        const basePath = `${req.protocol}://${req.get('host')}/public/upload/`;
+
+        const result = await this.userService.updateProfile(req.user.userId, {
+            image: basePath + fileName,
+        });
+
+        return res.status(200).send({
+            result,
+        });
+        console.log(basePath + fileName);
     };
 }
 

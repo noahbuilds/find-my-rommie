@@ -6,7 +6,9 @@ import compression from 'compression';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
-import cookieParser from 'cookie-parser'
+import cookieParser from 'cookie-parser';
+import path from 'path';
+import { isLoggedIn } from './middlewares/auth';
 
 class App {
     public express: Application;
@@ -53,6 +55,11 @@ class App {
 
     private initializeControllers(): void {
         this.express.use('/api/v1/user', userRouter);
+        this.express.use(
+            '/public/uploads',
+            isLoggedIn,
+            express.static('uploads')
+        );
     }
 
     public startListener() {

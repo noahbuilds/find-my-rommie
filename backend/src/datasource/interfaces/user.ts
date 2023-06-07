@@ -23,7 +23,8 @@ export interface IUser {
     genderinclusion: string;
     sportChoice: string;
     campusBudget: string;
-    campusPreference: string
+    campusPreference: string,
+    image: string
 }
 
 export interface ILogin {

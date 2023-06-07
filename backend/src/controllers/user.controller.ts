@@ -5,10 +5,10 @@ import {
     TokenService,
     UserService,
     AuthService,
+    ImageService,
 } from '../services';
 import { injectable } from 'tsyringe';
 import { IUser } from '../datasource/interfaces/user';
-import multer from 'multer';
 
 @injectable()
 class UserController {
@@ -16,7 +16,8 @@ class UserController {
         private readonly userService: UserService,
         private readonly matchService: MatchService,
         private readonly tokenService: TokenService,
-        private readonly authService: AuthService
+        private readonly authService: AuthService,
+        private readonly imageService: ImageService
     ) {}
     public createUser = async (req: Request, res: Response) => {
         const { firstName, lastName, email, password } = req.body;
@@ -237,20 +238,23 @@ class UserController {
     };
 
     public uploadFile = async (req: any, res: Response) => {
-        console.log(req.user);
         const file = req.file;
         if (!file) return res.status(400).send('No image in the request');
-        const fileName = file.filename;
-        const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+        if (!this.imageService.isFileValid(req))
+            return res.status(400).send('File is not valid');
+        try {
+            const filePath = await this.imageService.initializeApp(req);
+            const result = await this.userService.updateProfile(
+                req.user.userId,
+                { image: filePath }
+            );
 
-        const result = await this.userService.updateProfile(req.user.userId, {
-            image: basePath + fileName,
-        });
-
-        return res.status(200).send({
-            result,
-        });
-        console.log(basePath + fileName);
+            res.status(200).send({
+                result,
+            });
+        } catch (error) {
+            res.status(500).send(error);
+        }
     };
 }
 

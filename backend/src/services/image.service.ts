@@ -2,46 +2,75 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 
+import { initializeApp } from 'firebase/app';
+import {
+    getStorage,
+    ref,
+    getDownloadURL,
+    uploadBytesResumable,
+} from 'firebase/storage';
+import firebaseConfig from '../configs/firebase.config';
+import { injectable } from 'tsyringe';
+
 const FILE_TYPE_MAP: any = {
     'image/png': 'png',
     'image/jpeg': 'jpeg',
     'image/jpg': 'jpg',
 };
 
-const destinationFolder = 'public/uploads';
+@injectable()
+class ImageService {
+    constructor() {}
 
-fs.access(destinationFolder, (err) => {
-    if (err) {
-        // Folder does not exist, create it
-        fs.mkdir(destinationFolder, { recursive: true }, (mkdirErr) => {
-            if (mkdirErr) {
-                console.error('Error creating folder:', mkdirErr);
-            } else {
-                // Folder created successfully
-                console.log('created folder');
-            }
-        });
-    } else {
-        // Folder already exists
-        console.log('folder exists');
-    }
-});
+    public initializeApp = async (req: any) => {
+        try {
+            initializeApp(firebaseConfig.fireBaseConfig);
+            const storage = getStorage();
 
-//file storage engine
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const isValid = FILE_TYPE_MAP[file.mimetype];
-        let uploadError: any = new Error('invalid image type');
-        if (isValid) {
-            uploadError = null;
+            const storageRef = ref(
+                storage,
+                `files/${req.file.originalname + ' ' + Date.now()}`
+            );
+            const metadata = {
+                contentType: req.file.mimetype,
+            };
+
+            const snapshot = await uploadBytesResumable(
+                storageRef,
+                req.file.buffer,
+                metadata
+            );
+
+            const downloadURL = await getDownloadURL(snapshot.ref);
+
+            return downloadURL;
+        } catch (error) {
+            return error;
         }
-        cb(uploadError, path.join(destinationFolder));
-    },
-    filename: function (req, file, cb) {
-        const fileName = file.originalname.split(' ').join('-');
-        const extension = FILE_TYPE_MAP[file.mimetype];
-        cb(null, `${fileName}-${Date.now()}.${extension}`);
-    },
-});
+    };
 
-export default storage;
+    isFileValid = (req: any): boolean => {
+        const isValid = FILE_TYPE_MAP[req.file.mimetype];
+        if (isValid != null) {
+            return true;
+        }
+        return false;
+    };
+}
+
+// console.log(req.user);
+// const file = req.file;
+// if (!file) return res.status(400).send('No image in the request');
+// const fileName = file.filename;
+// const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+
+// const result = await this.userService.updateProfile(req.user.userId, {
+//     image: basePath + fileName,
+// });
+
+// return res.status(200).send({
+//     result,
+// });
+// console.log(basePath + fileName);
+
+export { ImageService };

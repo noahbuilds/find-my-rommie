@@ -13,7 +13,7 @@ class TokenService {
         let token: string;
         return (token = jwt.sign(
             { userId: user.id, email: user.email },
-            configuration.JWT_SECRET as string,
+            configuration.appConfig.JWT_SECRET as string,
             {
                 expiresIn: '1h',
             }

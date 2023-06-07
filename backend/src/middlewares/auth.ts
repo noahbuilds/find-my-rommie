@@ -8,7 +8,10 @@ const isLoggedIn = async (req: any, res: Response, next: NextFunction) => {
         return res.status(401).send('Access Denied');
     }
     try {
-        const verified = jwt.verify(token, configuration.JWT_SECRET as string);
+        const verified = jwt.verify(
+            token,
+            configuration.appConfig.JWT_SECRET as string
+        );
         req.user = verified;
         console.log(req.user);
         next();

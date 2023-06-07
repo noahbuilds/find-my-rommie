@@ -241,7 +241,7 @@ class UserController {
         const file = req.file;
         if (!file) return res.status(400).send('No image in the request');
         const fileName = file.filename;
-        const basePath = `${req.protocol}://${req.get('host')}/public/upload/`;
+        const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
 
         const result = await this.userService.updateProfile(req.user.userId, {
             image: basePath + fileName,

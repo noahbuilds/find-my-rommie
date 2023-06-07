@@ -239,6 +239,17 @@ class UserController {
         }
     };
 
+    public deleteUser = async (req: any, res: Response) => {
+        try {
+            const result = await this.userService.deleteUser(req.user.userId);
+            return res
+                .status(200)
+                .send({ msg: 'Deleted successfully', user: result });
+        } catch (error) {
+            return res.status(500).send(error);
+        }
+    };
+
     public uploadFile = async (req: any, res: Response) => {
         const file = req.file;
         if (!file) return res.status(400).send('No image in the request');

@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 const Card = (props: any) => {
   const navigate = useNavigate();
   // const [users, setUsers]= useState([])
+  console.log(props)
 
   // setUsers(props.user)
   const backgroundColor: any[] = [
@@ -31,15 +32,19 @@ const Card = (props: any) => {
   return (
     <div>
       <div className="card bg-dark card-hover" style={{ width: "18rem" }}>
-        <div className="d-flex justify-content-center">
+      <div
+          className=" d-flex justify-content-center"
+          style={{ marginTop: "7%" }}
+        >
           <img
-            className="card-img-top w-50 "
             src={
               props.user.image
                 ? props.user.image
-                : `https://api.dicebear.com/6.x/lorelei/svg?seed=${generateRandomIndex()}`
+                : `https://api.dicebear.com/6.x/lorelei/svg?seed=${props.user.firstName}`
             }
             alt="img"
+            style={{ height: "130px", width: "130px" }}
+            className="profile-photo"
           />
         </div>
 
@@ -49,7 +54,7 @@ const Card = (props: any) => {
               className="card-title text-uppercase text-white fw-bolder"
               style={{ fontSize: "12px" }}
             >
-              {props.user.firstName}
+              {props.user.firstName} {props.user.lastName}
             </h5>
             <span className=" badge badge-primary text-info">
               {" "}
@@ -58,7 +63,7 @@ const Card = (props: any) => {
           </div>
           <div
             className="d-flex gap-1 flex-wrap align-content-center align-items-center"
-            style={{ maxHeight: "50px", overflowY: "scroll" }}
+            // style={{ maxHeight: "50px", overflowY: "scroll" }}
           >
             {props.user.interests.map((interest: any) => {
               return (

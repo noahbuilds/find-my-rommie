@@ -14,6 +14,10 @@ class UserRepository {
         return await this.db.find({});
     }
 
+    public async getAllUsersExceptOne(id: string): Promise<IUser[] | null> {
+        return await this.db.find({ _id: { $ne: id } });
+    }
+
     public async findOne(params: string): Promise<IUser | null> {
         return await this.db.findOne({ _id: params });
     }
@@ -40,6 +44,11 @@ class UserRepository {
                 new: true,
             }
         );
+        return result;
+    };
+
+    public delete = async (userId: string): Promise<IUser | null> => {
+        const result = await this.db.findByIdAndDelete(userId);
         return result;
     };
 }

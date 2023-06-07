@@ -62,7 +62,7 @@ const userSchema = new mongoose.Schema<IUser>(
         },
         campusPreference: { type: String },
         campusBudget: { type: String },
-        image: {type: String}
+        image: { type: String },
     },
     { timestamps: true }
 );

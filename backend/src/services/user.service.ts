@@ -17,6 +17,11 @@ class UserService {
     public getUsers = async (): Promise<IUser[]> => {
         return await this.userRepository.getUsers();
     };
+    public getUsersExceptOne = async (
+        params: string
+    ): Promise<IUser[] | null> => {
+        return await this.userRepository.getAllUsersExceptOne(params);
+    };
     public findOne = async (params: string): Promise<IUser | null> => {
         return await this.userRepository.findOne(params);
     };
@@ -32,6 +37,11 @@ class UserService {
         option: any
     ): Promise<IUser | null> => {
         const result = await this.userRepository.updateProfile(userId, option);
+        return result;
+    };
+
+    public deleteUser = async (params: string): Promise<IUser | null> => {
+        const result = await this.deleteUser(params);
         return result;
     };
 }

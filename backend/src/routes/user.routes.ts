@@ -29,7 +29,8 @@ router
         isLoggedIn,
         uploadOptions.single('file'),
         userController.uploadFile
-    );
+    )
+    .delete('/delete', isLoggedIn, userController.deleteUser);
 // router
 
 export { router as userRouter };

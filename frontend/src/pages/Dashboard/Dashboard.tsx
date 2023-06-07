@@ -17,7 +17,9 @@ import { IUser } from "../../shared/interface/user";
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const baseUrl = "https://room-my-rommie-service.onrender.com/api/v1/user/";
+  const baseUrl =
+    "http://localhost:2000/api/v1/user/" ||
+    "https://room-my-rommie-service.onrender.com/api/v1/user/";
   const [loggedInUser, setloggedInUser] = useState<any>({});
   const [matchResult, setMatchResult] = useState([]);
   const [view, setView] = useState("card");
@@ -98,7 +100,7 @@ const Dashboard = () => {
                 : `https://api.dicebear.com/6.x/lorelei/svg?seed=${loggedInUser?.result.firstName}`
             }
             alt="img"
-            style={{ height: "150px", width: "140px" }}
+            style={{ height: "130px", width: "130px" }}
             className="profile-photo"
           />
         </div>

@@ -43,7 +43,7 @@ const UserProfile = () => {
 
   const navigate = useNavigate();
 
-  const baseUrl: string =
+  const baseUrl: string = 'http://localhost:2000/api/v1/user/' ||
     "https://room-my-rommie-service.onrender.com/api/v1/user/";
   const fetchUserData = async () => {
     const config = {

@@ -12,16 +12,17 @@ class MatchService {
 
     constructor(private readonly userService: UserService) {}
 
-    public getUsers = async (): Promise<void> => {
-        this.usersToMatch = await this.userService.getUsers();
-    };
-    public getUser = async (id: string): Promise<void> => {
-        const userToMatch = await this.userService.findOne(id);
-        this.usersToMatch = [userToMatch!];
+    // public getUsers = async (): Promise<void> => {
+    //     this.usersToMatch = await this.userService.getUsers();
+    // };
+    public getUsersExceptCurrentUser = async (id: string): Promise<void> => {
+        this.usersToMatch = (await this.userService.getUsersExceptOne(
+            id
+        )) as [];
         // console.log(this.usersToMatch);
     };
     public processMatch = async (userId: string) => {
-        await this.getUsers();
+        await this.getUsersExceptCurrentUser(userId);
 
         const currentUserProfile = await this.userService.findOne(userId);
         const attributes = ['age', 'location', 'interests', 'state'];
@@ -53,7 +54,7 @@ class MatchService {
         currentUserId: string
     ) => {
         try {
-            await this.getUser(userToMatchId);
+            await this.getUsersExceptCurrentUser(userToMatchId);
             console.log(this.usersToMatch);
             const currentUserProfile = await this.userService.findOne(
                 currentUserId
@@ -228,7 +229,7 @@ class MatchService {
                 socialStats,
                 campusPreference,
                 campusBudget,
-                image
+                image,
             });
 
             this.resetTotalScore();

@@ -24,7 +24,6 @@ const Dashboard = () => {
   const [view, setView] = useState("card");
   const [selectedAttributes, setAttributes] = useState(null);
   const attributes = [
-    "location",
     "interests",
     "socialStats",
     "course",
@@ -34,6 +33,9 @@ const Dashboard = () => {
     "campusPreference",
     "country",
     "sportChoice",
+    "male",
+    "female",
+    "age",
   ];
 
   useEffect(() => {
@@ -68,7 +70,7 @@ const Dashboard = () => {
     try {
       const response = await axios.post(
         baseUrl + `match`,
-        selectedAttributes,
+        { attributes: selectedAttributes },
         config
       );
       if (response.status === 200) {
@@ -149,7 +151,7 @@ const Dashboard = () => {
           onChange={(e) => setAttributes(e.value)}
           options={attributes}
           display="chip"
-          placeholder="Filter by"
+          placeholder="Match with"
           maxSelectedLabels={3}
           className="w-full md:w-20rem"
         />

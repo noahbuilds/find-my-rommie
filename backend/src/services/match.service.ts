@@ -103,11 +103,14 @@ class MatchService {
                     } else {
                         this.totalScore += 1;
                     }
-                } else if (attr === 'location') {
-                    if (
-                        currentUserProfile!.location ===
-                        this.usersToMatch![i].location
-                    ) {
+                } else if (attr === 'male') {
+                    if (this.usersToMatch![i].gender === 'male') {
+                        this.totalScore += 10;
+                    } else {
+                        this.totalScore += 1;
+                    }
+                } else if (attr === 'female') {
+                    if (this.usersToMatch![i].gender === 'female') {
                         this.totalScore += 10;
                     } else {
                         this.totalScore += 1;

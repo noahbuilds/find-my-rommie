@@ -20,8 +20,8 @@ class UserController {
         private readonly imageService: ImageService
     ) {}
     public createUser = async (req: Request, res: Response) => {
-        const { firstName, lastName, email, password } = req.body;
-        if (!(email && password && firstName && lastName)) {
+        const { firstName, lastName, email, password, gender } = req.body;
+        if (!(email && password && firstName && lastName && gender)) {
             return res.status(400).send({ msg: 'All input is required' });
         }
         try {

@@ -20,8 +20,8 @@ class UserController {
         private readonly imageService: ImageService
     ) {}
     public createUser = async (req: Request, res: Response) => {
-        const { firstName, lastName, email, password, gender } = req.body;
-        if (!(email && password && firstName && lastName && gender)) {
+        const { firstName, lastName, email, password, gender , age} = req.body;
+        if (!(email && password && firstName && lastName && gender && age)) {
             return res.status(400).send({ msg: 'All input is required' });
         }
         try {
@@ -215,6 +215,8 @@ class UserController {
                 socialStats,
                 _id,
                 image,
+                age,
+                gender
             } = data as IUser;
             const result = {
                 _id,
@@ -231,6 +233,8 @@ class UserController {
                 socialStats,
                 sportChoice,
                 image,
+                age,
+                gender
             };
             res.status(200).send({
                 result,

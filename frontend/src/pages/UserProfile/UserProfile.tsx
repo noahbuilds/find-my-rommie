@@ -355,6 +355,19 @@ const UserProfile = () => {
                 ></textarea>
               </label>
 
+              <label htmlFor="age" className="row custom-form-row">
+                <span className="col-md-12 col-lg-6 col-sm-12 mb-1 py-2 text-center">
+                  Age
+                </span>
+                <input
+                  type="number"
+                  value={userProfile.result.age}
+                  min={17}
+                  name="age"
+                  className="col mx-4 mx-sm-0 form-control"
+                  onChange={handleChange}
+                />
+              </label>
               <p className="h4 text-center mt-4 mb-1">Basic Demographics</p>
 
               <label className="row custom-form-row no-height" id="f-country">
@@ -760,52 +773,100 @@ const UserProfile = () => {
                   <option disabled> -- select -- </option>
                   <option value="Unsure">Unsure</option>
 
-                  <option value="Boys Hostel A">
+                  <option
+                    disabled={userProfile.result.gender === "female"}
+                    value="Boys Hostel A"
+                  >
                     Boys Hostel A = 130,000 Naira{" "}
                   </option>
-                  <option value="Boys Hostel B">
+                  <option
+                    disabled={userProfile.result.gender === "female"}
+                    value="Boys Hostel B"
+                  >
                     Boys Hostel B = 130,000 Naira
                   </option>
-                  <option value="Boys Hostel C">
+                  <option
+                    disabled={userProfile.result.gender === "female"}
+                    value="Boys Hostel C"
+                  >
                     Boys Hostel C = 130,000 Naira
                   </option>
-                  <option value="Boys Hostel D">
+                  <option
+                    disabled={userProfile.result.gender === "female"}
+                    value="Boys Hostel D"
+                  >
                     Boys Hostel D = 130,000 Naira
                   </option>
-                  <option value="Boys Hostel E">
+                  <option
+                    disabled={userProfile.result.gender === "female"}
+                    value="Boys Hostel E"
+                  >
                     Boys Hostel E = 130,000 Naira
                   </option>
-                  <option value="Boys Hostel F">
+                  <option
+                    disabled={userProfile.result.gender === "female"}
+                    value="Boys Hostel F"
+                  >
                     Boys Hostel F = 130,000 Naira
                   </option>
-                  <option value="Boys Hostel G">
+                  <option
+                    disabled={userProfile.result.gender === "female"}
+                    value="Boys Hostel G"
+                  >
                     Boys Hostel G = 130,000 Naira
                   </option>
-                  <option value="Boys Hostel H">
+                  <option
+                    disabled={userProfile.result.gender === "female"}
+                    value="Boys Hostel H"
+                  >
                     Boys Hostel H = 130,000 Naira
                   </option>
-                  <option value="Boys Hostel I">
+                  <option
+                    disabled={userProfile.result.gender === "female"}
+                    value="Boys Hostel I"
+                  >
                     Boys Hostel I = 130,000 Naira
                   </option>
-                  <option value="Boys Hostel J">
+                  <option
+                    disabled={userProfile.result.gender === "female"}
+                    value="Boys Hostel J"
+                  >
                     Boys Hostel J = 130,000 Naira
                   </option>
-                  <option value="Boys Hostel K">
+                  <option
+                    disabled={userProfile.result.gender === "female"}
+                    value="Boys Hostel K"
+                  >
                     Boys Hostel K = 160,000 Naira
                   </option>
-                  <option value="Boys Hostel L">
+                  <option
+                    disabled={userProfile.result.gender === "female"}
+                    value="Boys Hostel L"
+                  >
                     Boys Hostel L = 180,000 Naira
                   </option>
-                  <option value="Boys Hostel M">
+                  <option
+                    disabled={userProfile.result.gender === "female"}
+                    value="Boys Hostel M"
+                  >
                     Boys Hostel M = 230,000 Naira
                   </option>
-                  <option value="Girls Stanzel Hostel ">
+                  <option
+                    disabled={userProfile.result.gender === "male"}
+                    value="Girls Stanzel Hostel "
+                  >
                     Girls Stanzel Hostel = 160,000 Naira
                   </option>
-                  <option value="Girls CICL Hostel">
+                  <option
+                    disabled={userProfile.result.gender === "male"}
+                    value="Girls CICL Hostel"
+                  >
                     Girls CICL Hostel = 180,000{" "}
                   </option>
-                  <option value="Girls PA ETO Hostel">
+                  <option
+                    disabled={userProfile.result.gender === "male"}
+                    value="Girls PA ETO Hostel"
+                  >
                     Girls PA ETO Hostel = 250,000 Naira
                   </option>
                 </select>

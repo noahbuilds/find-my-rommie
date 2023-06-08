@@ -115,32 +115,43 @@ const SignUpPage = () => {
           </label>
           <label htmlFor="gender">
             Gender
-          <span className="col-md-12 col-lg-6 col-sm-12 mb-1 py-2 text-center">
-            <div className="form-check-inline">
-              <label className="form-check-label">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="gender"
-                  value="male"
-                  onChange={handleChange}
-                />
-                Male
-              </label>
-            </div>
-            <div className="form-check-inline">
-              <label className="form-check-label">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="gender"
-                  value="female"
-                  onChange={handleChange}
-                />
-                Female
-              </label>
-            </div>
-          </span>
+            <span className="col-md-12 col-lg-6 col-sm-12 mb-1 py-2 text-center">
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="gender"
+                    value="male"
+                    onChange={handleChange}
+                  />
+                  Male
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="gender"
+                    value="female"
+                    onChange={handleChange}
+                  />
+                  Female
+                </label>
+              </div>
+            </span>
+          </label>
+          <label className="w-100">
+            <span className="sr-only">Age</span>
+            <input
+              className="form-control mb-3"
+              type="number"
+              min={17}
+              name="age"
+              placeholder="age"
+              onChange={handleChange}
+            />
           </label>
 
           <button

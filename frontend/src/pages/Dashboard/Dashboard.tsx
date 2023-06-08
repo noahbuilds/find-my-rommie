@@ -11,6 +11,7 @@ import { Column } from "primereact/column";
 import NavBar from "../../components/NavBar/NavBar";
 import { useNavigate, redirect } from "react-router-dom";
 import { IUser } from "../../shared/interface/user";
+import { MultiSelect } from "primereact/multiselect";
 
 // let matchResult: any = null;
 
@@ -21,6 +22,14 @@ const Dashboard = () => {
   const [loggedInUser, setloggedInUser] = useState<any>({});
   const [matchResult, setMatchResult] = useState([]);
   const [view, setView] = useState("card");
+  const [selectedCities, setSelectedCities] = useState(null);
+  const cities = [
+    { name: "New York", code: "NY" },
+    { name: "Rome", code: "RM" },
+    { name: "London", code: "LDN" },
+    { name: "Istanbul", code: "IST" },
+    { name: "Paris", code: "PRS" },
+  ];
 
   useEffect(() => {
     // const checkIfLoggedIn = () => {
@@ -80,7 +89,7 @@ const Dashboard = () => {
   };
 
   return (
-    <>
+    <div className="cover-image">
       <NavBar token={localStorage.getItem("token")} />
       <section className="t">
         {/* <p className="h4 text-center mb-5">
@@ -99,16 +108,16 @@ const Dashboard = () => {
             }
             alt="img"
             style={{ height: "130px", width: "130px" }}
-            className="profile-photo"
+            className="profile-photo border border-5"
           />
         </div>
 
-        <p className="text-info text-center">
-          Welcome back {loggedInUser.firstName}
+        <p className="text-light text-center fs-2 fw-bolder">
+          Welcome back{" "}
+          <span className="text-info"> {loggedInUser.firstName}</span>
         </p>
 
-        <p className="text-center">Users are being matched with your profile</p>
-        <p className="text-center small text-danger">
+        <p className="text-center small fs-6 text-danger px-5">
           NB: Make sure your <a href="/profile">profile</a> is at least 50%
           completed to see matches
         </p>
@@ -118,13 +127,24 @@ const Dashboard = () => {
             <Card user={matchResult} showButton={false}/>
             <Card user={matchResult} showButton={false}/> */}
 
-      <section className="text-center my-4 " id="matches">
-        <p className="h2 text-center mt-5">Matches</p>
+      <section className="text-center my-4 m-5 " id="matches">
+        <p className="h2 text-center mt-3">Matches</p>
+
         <p className="text-center small text-info">
           If you see someone who looks like a good match, reach out to them
           using the contact information they listed.
         </p>
 
+        <MultiSelect
+          value={selectedCities}
+          onChange={(e) => setSelectedCities(e.value)}
+          options={cities}
+          optionLabel="name"
+          display="chip"
+          placeholder="Filter by"
+          maxSelectedLabels={3}
+          className="w-full md:w-20rem"
+        />
         {/* <button className="btn btn-sm btn-outline-dark" onClick={changeView}>
           Change view
         </button> */}
@@ -196,7 +216,7 @@ const Dashboard = () => {
             </div>
           </div>
         ) : (
-          <div className="row m-5">
+          <div className="row mt-4">
             <div className="row-cols-12">
               <div className="d-flex flex-wrap justify-content-center gap-4">
                 {matchResult ? (
@@ -246,7 +266,7 @@ const Dashboard = () => {
                     </tbody>
                 </table> */}
       </section>
-    </>
+    </div>
   );
 };
 

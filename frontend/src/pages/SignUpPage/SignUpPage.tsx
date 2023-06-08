@@ -62,9 +62,9 @@ const SignUpPage = () => {
   return (
     <>
       <img
-        src="/assets/background.jpg"
+        src="/assets/banner.png"
         className="img splash"
-        alt="main background image"
+        alt="main"
       />
       <section id="formFloat">
         <div id="formClose">

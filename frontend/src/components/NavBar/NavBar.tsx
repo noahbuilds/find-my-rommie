@@ -14,7 +14,8 @@ const NavBar = (props: any) => {
   };
   return (
     <>
-      <nav className="navbar nav  spnav navbar-expand-lg navbar-dark bg-daek ">
+    <div className="d-flex justify-content-end text-end">
+    <nav className="navbar nav  spnav navbar-expand-lg navbar-dark bg-dark ">
         <a className="navbar-brand" href="/">
           {/* <img src="/assets/RFA (2).png"  height="50"/> */}
         </a>
@@ -41,6 +42,9 @@ const NavBar = (props: any) => {
             <a className="nav-item nav-link mx-lg-2 mx-1" href="/about">
               Why RoommateFinder?
             </a>
+            <a className="nav-item nav-link mx-lg-2 mx-1" href="/support">
+              Support
+            </a>
 
             {props.token ? (
               <>
@@ -66,6 +70,8 @@ const NavBar = (props: any) => {
           </div>
         </div>
       </nav>
+    </div>
+     
     </>
   );
 };

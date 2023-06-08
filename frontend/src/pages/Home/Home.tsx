@@ -57,11 +57,7 @@ const Home = () => {
     <>
       <NavBar user={localStorage.getItem("token")}></NavBar>
       <main className="" id="main">
-        <img
-          src="/assets/background.jpg"
-          className="img splash"
-          alt="main background image"
-        />
+        <img src="/assets/banner.png" className="img splash" alt="main" />
 
         <section className="txt splash">
           <p className="title">

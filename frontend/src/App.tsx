@@ -11,6 +11,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import SupportPage from "./pages/SupportPage/SupportPage";
 // import dotenv from 'dotenv';
 // dotenv.config();
 
@@ -42,6 +43,7 @@ function App() {
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/profile" element={[<UserProfile />]} />
         <Route path="/about" element={[<AboutPage />]} />
+        <Route path="/support" element={[<SupportPage />]} />
         <Route
           path="/match-profile/:id"
           element={[

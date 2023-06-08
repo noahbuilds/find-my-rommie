@@ -63,7 +63,7 @@ const Card = (props: any) => {
           </div>
           <div
             className="d-flex gap-1 flex-wrap align-content-center align-items-center"
-            // style={{ maxHeight: "50px", overflowY: "scroll" }}
+            style={{ maxHeight: "55px", overflowY: "hidden" }}
           >
             {props.user.interests.map((interest: any) => {
               return (
@@ -79,46 +79,46 @@ const Card = (props: any) => {
           </div>
           <div className="text-start">
             <span className=" text-start" style={{ fontSize: "13px" }}>
-              <span className="text-bg-warning">Biography: </span> <br />
-              <span style={{ fontSize: "13px" }}>{props.user.bio}</span>
+              <span className="fw-normal">Biography: </span> <br />
+              <span style={{ fontSize: "13px", color:'grey' }}>{props.user.bio}</span>
             </span>
           </div>
           <div className="text-start">
             <span className=" text-start" style={{ fontSize: "13px" }}>
-              <span className=" text-bg-info">Visitor Tolerance: </span>
-              <span className="text-info" style={{ fontSize: "13px" }}>
+              <span className="fw-normal ">Visitor Tolerance: </span>
+              <span className="" style={{ fontSize: "13px", color:'grey' }}>
                 {props.user.visitorTolerance}
               </span>
             </span>
           </div>
           <div className="text-start">
             <span className=" text-start" style={{ fontSize: "13px" }}>
-              <span className="text-bg-primary">Room Temperature: </span>
-              <span className="text-info" style={{ fontSize: "13px" }}>
+              <span className="fw-normal">Room Temperature: </span>
+              <span className="" style={{ fontSize: "13px" , color:'grey' }}>
                 {props.user.roomTemperature}
               </span>
             </span>
           </div>
           <div className="text-start">
             <span className=" text-start" style={{ fontSize: "13px" }}>
-              <span className="text-bg-danger">Social Status: </span>
-              <span className="text-info" style={{ fontSize: "13px" }}>
+              <span className="fw-normal">Social Status: </span>
+              <span className="" style={{ fontSize: "13px", color:'grey' }}>
                 {props.user.socialStats}
               </span>
             </span>
           </div>
           <div className="text-start">
             <span className=" text-start" style={{ fontSize: "13px" }}>
-              <span className="text-bg-success">Campus Preference: </span>
-              <span className="text-info" style={{ fontSize: "13px" }}>
+              <span className="fw-normal">Campus Preference: </span>
+              <span className="" style={{ fontSize: "13px", color:'grey' }}>
                 {props.user.campusPreference}
               </span>
             </span>
           </div>
           <div className="text-start">
             <span className=" text-start" style={{ fontSize: "13px" }}>
-              <span className="text-bg-info">Campus: </span>
-              <span className="text-info" style={{ fontSize: "13px" }}>
+              <span className="fw-normal">Campus: </span>
+              <span className="" style={{ fontSize: "13px", color:'grey' }}>
                 {props.user.campusBudget}
               </span>
             </span>

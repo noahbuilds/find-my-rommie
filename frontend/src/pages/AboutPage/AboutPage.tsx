@@ -8,10 +8,10 @@ const AboutPage = () => {
          <NavBar token={localStorage.getItem('token')} />
             <main className="mt-5">
             <img
-                    src="/assets/background.jpg"
-                    className="img splash"
-                    alt="main background image"
-                />
+        src="/assets/banner.png"
+        className="img splash"
+        alt="main"
+      />
                 <p className="h2 text-center">About RoommateFinder</p>
 
                 <div className="d-flex justify-content-center mt-5">

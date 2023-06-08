@@ -54,11 +54,7 @@ const LoginPage = () => {
   };
   return (
     <>
-      <img
-        src="/assets/background.jpg"
-        className="img splash"
-        alt="main background image"
-      />
+      <img src="/assets/banner.png" className="img splash" alt="main" />
       <section id="formFloat">
         <div id="formClose">
           {/* <i

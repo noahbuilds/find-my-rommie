@@ -41,7 +41,7 @@ class UserService {
     };
 
     public deleteUser = async (params: string): Promise<IUser | null> => {
-        const result = await this.deleteUser(params);
+        const result = await this.userRepository.delete(params);
         return result;
     };
 }

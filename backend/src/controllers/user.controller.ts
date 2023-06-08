@@ -150,7 +150,8 @@ class UserController {
         console.log(req.user.userId);
         try {
             const result = await this.matchService.processMatch(
-                req.user.userId
+                req.user.userId,
+                req.body.attributes
             );
 
             res.status(200).json({

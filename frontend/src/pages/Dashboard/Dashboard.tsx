@@ -22,13 +22,18 @@ const Dashboard = () => {
   const [loggedInUser, setloggedInUser] = useState<any>({});
   const [matchResult, setMatchResult] = useState([]);
   const [view, setView] = useState("card");
-  const [selectedCities, setSelectedCities] = useState(null);
-  const cities = [
-    { name: "New York", code: "NY" },
-    { name: "Rome", code: "RM" },
-    { name: "London", code: "LDN" },
-    { name: "Istanbul", code: "IST" },
-    { name: "Paris", code: "PRS" },
+  const [selectedAttributes, setAttributes] = useState(null);
+  const attributes = [
+    "location",
+    "interests",
+    "socialStats",
+    "course",
+    "visitorTolerance",
+    "roomTemperature",
+    "campusBudget",
+    "campusPreference",
+    "country",
+    "sportChoice",
   ];
 
   useEffect(() => {
@@ -49,36 +54,36 @@ const Dashboard = () => {
       };
       const response = await axios.get(baseUrl + "find/whoami", config);
       setloggedInUser(response.data.result);
-      console.log(response.data.result);
-    };
-
-    const matchProfiles = async () => {
-      // checkIfLoggedIn();
-      const config = {
-        headers: {
-          "auth-token": localStorage.getItem("token"),
-        },
-      };
-      try {
-        const response = await axios.get(baseUrl + `match`, config);
-        if (response.status === 200) {
-          setMatchResult(response.data.msg);
-          // console.log(matchResult);
-        } else if (response.status === 401) {
-          console.log("here i am");
-          navigate("/login");
-        }
-      } catch (error) {
-        navigate("/login");
-      }
-
-      // console.log('no result');
     };
 
     fetchLoggedInUserData();
-    matchProfiles();
   }, []);
+  const matchProfiles = async () => {
+    // checkIfLoggedIn();
+    const config = {
+      headers: {
+        "auth-token": localStorage.getItem("token"),
+      },
+    };
+    try {
+      const response = await axios.post(
+        baseUrl + `match`,
+        selectedAttributes,
+        config
+      );
+      if (response.status === 200) {
+        setMatchResult(response.data.msg);
+        // console.log(matchResult);
+      } else if (response.status === 401) {
+        console.log("here i am");
+        navigate("/login");
+      }
+    } catch (error) {
+      navigate("/login");
+    }
 
+    // console.log('no result');
+  };
   const changeView = () => {
     if (view === "table") {
       setView("card");
@@ -86,6 +91,10 @@ const Dashboard = () => {
     if (view === "card") {
       setView("table");
     }
+  };
+  const findMatch = () => {
+    console.log(selectedAttributes);
+    matchProfiles();
   };
 
   return (
@@ -136,15 +145,17 @@ const Dashboard = () => {
         </p>
 
         <MultiSelect
-          value={selectedCities}
-          onChange={(e) => setSelectedCities(e.value)}
-          options={cities}
-          optionLabel="name"
+          value={selectedAttributes}
+          onChange={(e) => setAttributes(e.value)}
+          options={attributes}
           display="chip"
           placeholder="Filter by"
           maxSelectedLabels={3}
           className="w-full md:w-20rem"
         />
+        <button onClick={findMatch} className="btn btn-sm btn-dark">
+          Find Match
+        </button>
         {/* <button className="btn btn-sm btn-outline-dark" onClick={changeView}>
           Change view
         </button> */}
@@ -220,9 +231,11 @@ const Dashboard = () => {
             <div className="row-cols-12">
               <div className="d-flex flex-wrap justify-content-center gap-4">
                 {matchResult ? (
-                  matchResult.map((result: any) => {
+                  matchResult.map((result: any, index) => {
                     if (!result.compatibilityScore.includes("NaN")) {
-                      return <Card user={result} showButton={true} />;
+                      return (
+                        <Card user={result} showButton={true} key={index} />
+                      );
                     }
                   })
                 ) : (

@@ -14,7 +14,7 @@ const uploadOptions = multer({ storage: multer.memoryStorage() });
 router
     .get('/', isLoggedIn, userController.getUsers)
     .post('/signup', userController.createUser)
-    .get('/match/', isLoggedIn, userController.matchUser)
+    .post('/match/', isLoggedIn, userController.matchUser)
     .get(
         '/match/single/:userToMatchId/:currentUserId',
         userController.matchSingleProfile

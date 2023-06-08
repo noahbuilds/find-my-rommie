@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 const Card = (props: any) => {
   const navigate = useNavigate();
   // const [users, setUsers]= useState([])
-  console.log(props)
+ 
 
   // setUsers(props.user)
   const backgroundColor: any[] = [

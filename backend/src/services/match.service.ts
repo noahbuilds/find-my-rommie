@@ -21,11 +21,11 @@ class MatchService {
         )) as [];
         // console.log(this.usersToMatch);
     };
-    public processMatch = async (userId: string) => {
+    public processMatch = async (userId: string, attributes: string[]) => {
         await this.getUsersExceptCurrentUser(userId);
 
         const currentUserProfile = await this.userService.findOne(userId);
-        const attributes = ['age', 'location', 'interests', 'state'];
+        // const attributes = ['age', 'location', 'interests', 'state'];
         let startFrom = 0;
         let endAt = 250;
         if (!(endAt > this.usersToMatch!.length)) {
@@ -124,10 +124,10 @@ class MatchService {
                             this.usersToMatch![i].interests.length
                         );
                     this.totalScore += Math.round(interestScore * 10);
-                } else if (attr === 'state') {
+                } else if (attr === 'country') {
                     if (
-                        currentUserProfile!.stateOfOrigin ==
-                        this.usersToMatch![i].stateOfOrigin
+                        currentUserProfile!.country ==
+                        this.usersToMatch![i].country
                     ) {
                         this.totalScore += 10;
                     } else {
@@ -182,6 +182,15 @@ class MatchService {
                     if (
                         currentUserProfile!.campusPreference ==
                         this.usersToMatch![i].campusPreference
+                    ) {
+                        this.totalScore += 10;
+                    } else {
+                        this.totalScore += 1;
+                    }
+                } else if (attr === 'sportChoice') {
+                    if (
+                        currentUserProfile!.sportChoice ==
+                        this.usersToMatch![i].sportChoice
                     ) {
                         this.totalScore += 10;
                     } else {

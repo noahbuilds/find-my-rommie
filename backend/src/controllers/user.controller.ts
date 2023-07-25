@@ -20,12 +20,11 @@ class UserController {
         private readonly imageService: ImageService
     ) {}
     public createUser = async (req: Request, res: Response) => {
-        const { firstName, lastName, email, password, gender , age} = req.body;
+        const { firstName, lastName, email, password, gender, age } = req.body;
         if (!(email && password && firstName && lastName && gender && age)) {
             return res.status(400).send({ msg: 'All input is required' });
         }
         try {
-            console.log(req.body);
             const foundEmail = await this.userService.findEmail(req.body.email);
             if (foundEmail) {
                 return res.status(409).send({
@@ -165,24 +164,6 @@ class UserController {
         }
     };
 
-    public matchSingleProfile = async (req: Request, res: Response) => {
-        try {
-            const result = await this.matchService.matchSingleProfile(
-                req.params.userToMatchId,
-                req.params.currentUserId
-            );
-
-            res.json({
-                msg: result,
-                processed: this.matchService.processedData,
-            });
-            this.matchService.resetTotalScore();
-            this.matchService.clearResult();
-        } catch (error) {
-            return res.status(500).send({ msg: error });
-        }
-    };
-
     public findRoommie = async (req: Request, res: Response) => {
         try {
             const result = await this.matchService.findRoommie(req.body);
@@ -216,7 +197,7 @@ class UserController {
                 _id,
                 image,
                 age,
-                gender
+                gender,
             } = data as IUser;
             const result = {
                 _id,
@@ -234,7 +215,7 @@ class UserController {
                 sportChoice,
                 image,
                 age,
-                gender
+                gender,
             };
             res.status(200).send({
                 result,

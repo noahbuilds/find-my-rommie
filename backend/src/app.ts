@@ -55,11 +55,6 @@ class App {
 
     private initializeControllers(): void {
         this.express.use('/api/v1/user', userRouter);
-        this.express.use(
-            '/public/uploads',
-            isLoggedIn,
-            express.static('public/uploads')
-        );
     }
 
     public startListener() {

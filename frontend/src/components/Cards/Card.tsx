@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import "./Card.css";
 import { useNavigate } from "react-router-dom";
-import MatchPage from "../../pages/MatchPage/MatchPage";
+
 import { ToastContainer, toast } from "react-toastify";
 
 const Card = (props: any) => {
   const navigate = useNavigate();
   // const [users, setUsers]= useState([])
- 
 
   // setUsers(props.user)
   const backgroundColor: any[] = [
@@ -32,7 +31,7 @@ const Card = (props: any) => {
   return (
     <div>
       <div className="card bg-dark card-hover" style={{ width: "18rem" }}>
-      <div
+        <div
           className=" d-flex justify-content-center"
           style={{ marginTop: "7%" }}
         >
@@ -80,13 +79,15 @@ const Card = (props: any) => {
           <div className="text-start">
             <span className=" text-start" style={{ fontSize: "13px" }}>
               <span className="fw-normal">Biography: </span> <br />
-              <span style={{ fontSize: "13px", color:'grey' }}>{props.user.bio}</span>
+              <span style={{ fontSize: "13px", color: "grey" }}>
+                {props.user.bio}
+              </span>
             </span>
           </div>
           <div className="text-start">
             <span className=" text-start" style={{ fontSize: "13px" }}>
               <span className="fw-normal ">Visitor Tolerance: </span>
-              <span className="" style={{ fontSize: "13px", color:'grey' }}>
+              <span className="" style={{ fontSize: "13px", color: "grey" }}>
                 {props.user.visitorTolerance}
               </span>
             </span>
@@ -94,7 +95,7 @@ const Card = (props: any) => {
           <div className="text-start">
             <span className=" text-start" style={{ fontSize: "13px" }}>
               <span className="fw-normal">Room Temperature: </span>
-              <span className="" style={{ fontSize: "13px" , color:'grey' }}>
+              <span className="" style={{ fontSize: "13px", color: "grey" }}>
                 {props.user.roomTemperature}
               </span>
             </span>
@@ -102,7 +103,7 @@ const Card = (props: any) => {
           <div className="text-start">
             <span className=" text-start" style={{ fontSize: "13px" }}>
               <span className="fw-normal">Social Status: </span>
-              <span className="" style={{ fontSize: "13px", color:'grey' }}>
+              <span className="" style={{ fontSize: "13px", color: "grey" }}>
                 {props.user.socialStats}
               </span>
             </span>
@@ -110,7 +111,7 @@ const Card = (props: any) => {
           <div className="text-start">
             <span className=" text-start" style={{ fontSize: "13px" }}>
               <span className="fw-normal">Campus Preference: </span>
-              <span className="" style={{ fontSize: "13px", color:'grey' }}>
+              <span className="" style={{ fontSize: "13px", color: "grey" }}>
                 {props.user.campusPreference}
               </span>
             </span>
@@ -118,7 +119,7 @@ const Card = (props: any) => {
           <div className="text-start">
             <span className=" text-start" style={{ fontSize: "13px" }}>
               <span className="fw-normal">Campus: </span>
-              <span className="" style={{ fontSize: "13px", color:'grey' }}>
+              <span className="" style={{ fontSize: "13px", color: "grey" }}>
                 {props.user.campusBudget}
               </span>
             </span>

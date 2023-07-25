@@ -1,16 +1,10 @@
-import Header from "../../components/NavBar/NavBar";
-import Body from "../../components/Body/Body";
-import React, { ChangeEvent, useEffect } from "react";
+import { useEffect } from "react";
 import "./Home.css";
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NavBar from "../../components/NavBar/NavBar";
-import { render } from "@testing-library/react";
-import App from "../../App";
+
 const Home = () => {
   const baseUrl = "https://room-my-rommie-service.onrender.com/api/v1/user/";
 
@@ -28,30 +22,12 @@ const Home = () => {
       const response = await axios.get(baseUrl + "find/whoami", config);
       console.log(response);
       if (response.status === 200) {
-        // localStorage
-
         navigate("/dashboard");
-      } else {
-        // navigate('/login');
       }
     } catch (error) {}
   };
 
   const navigate = useNavigate();
-  let email = "";
-  const [isLoginFormActive, setisLoginFormActiveActive] = useState(false);
-  const showForms = () => {
-    setisLoginFormActiveActive(true);
-  };
-
-  const closeLoginForm = () => {
-    setisLoginFormActiveActive(false);
-  };
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    email = e.target.value;
-    console.log(e.target.value);
-  };
 
   return (
     <>

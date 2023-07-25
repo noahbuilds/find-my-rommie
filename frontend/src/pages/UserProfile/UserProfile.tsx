@@ -60,9 +60,6 @@ const UserProfile = () => {
       }
     } catch (error: any) {
       toast("Login to continue");
-      //   navigate("/login");
-
-      // console.log(error.response.status);
     }
   };
   const config = {

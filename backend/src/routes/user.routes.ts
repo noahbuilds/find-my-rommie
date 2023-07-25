@@ -15,10 +15,7 @@ router
     .get('/', isLoggedIn, userController.getUsers)
     .post('/signup', userController.createUser)
     .post('/match/', isLoggedIn, userController.matchUser)
-    .get(
-        '/match/single/:userToMatchId/:currentUserId',
-        userController.matchSingleProfile
-    )
+
     .get('/:userId', userController.getUserById)
     .post('/login', userController.loginUser)
     .post('find-rommie', userController.findRoommie)

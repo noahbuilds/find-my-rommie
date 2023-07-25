@@ -12,9 +12,6 @@ class MatchService {
 
     constructor(private readonly userService: UserService) {}
 
-    // public getUsers = async (): Promise<void> => {
-    //     this.usersToMatch = await this.userService.getUsers();
-    // };
     public getUsersExceptCurrentUser = async (id: string): Promise<void> => {
         this.usersToMatch = (await this.userService.getUsersExceptOne(
             id
@@ -49,41 +46,6 @@ class MatchService {
      * name
      */
 
-    public matchSingleProfile = async (
-        userToMatchId: string,
-        currentUserId: string
-    ) => {
-        try {
-            await this.getUsersExceptCurrentUser(userToMatchId);
-            console.log(this.usersToMatch);
-            const currentUserProfile = await this.userService.findOne(
-                currentUserId
-            );
-            const attributes = [
-                'location',
-                'interests',
-                'socialStats',
-                'course',
-                'visitorTolerance',
-            ];
-            let startFrom = 0;
-            let endAt = 30;
-            console.log(this.usersToMatch);
-            if (!(endAt > this.usersToMatch!.length)) {
-                this.matcher(currentUserProfile!, attributes, startFrom, endAt);
-            } else {
-                let startFrom = 0;
-                let endAt = this.usersToMatch?.length;
-                this.matcher(currentUserProfile!, attributes, startFrom, endAt);
-            }
-            this.getNumberOfDataProcessed(startFrom, endAt);
-            console.log(this.result);
-            return this.result;
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     public matcher(
         currentUserProfile: IUser,
         attributes: string[],
@@ -92,113 +54,128 @@ class MatchService {
     ): void {
         for (let i = startFrom; i < endAt!; i++) {
             attributes.forEach((attr) => {
-                if (attr === 'age') {
-                    const ageDiff = Math.abs(
-                        currentUserProfile!.age - this.usersToMatch![i].age
-                    );
-                    if (ageDiff < 3) {
-                        this.totalScore += 10;
-                    } else if (ageDiff < 5) {
-                        this.totalScore += 5;
-                    } else {
-                        this.totalScore += 1;
-                    }
-                } else if (attr === 'male') {
-                    if (this.usersToMatch![i].gender === 'male') {
-                        this.totalScore += 10;
-                    } else {
-                        this.totalScore += 1;
-                    }
-                } else if (attr === 'female') {
-                    if (this.usersToMatch![i].gender === 'female') {
-                        this.totalScore += 10;
-                    } else {
-                        this.totalScore += 1;
-                    }
-                } else if (attr === 'interests') {
-                    const sharedInterests =
-                        currentUserProfile!.interests.filter((interest: any) =>
-                            this.usersToMatch![i].interests.includes(interest)
+                switch (attr) {
+                    case 'age':
+                        const ageDiff = Math.abs(
+                            currentUserProfile!.age - this.usersToMatch![i].age
                         );
-                    const interestScore =
-                        sharedInterests.length /
-                        Math.max(
-                            currentUserProfile!.interests.length,
-                            this.usersToMatch![i].interests.length
-                        );
-                    this.totalScore += Math.round(interestScore * 10);
-                } else if (attr === 'country') {
-                    if (
-                        currentUserProfile!.country ==
-                        this.usersToMatch![i].country
-                    ) {
-                        this.totalScore += 10;
-                    } else {
-                        this.totalScore += 1;
-                    }
-                } else if (attr === 'socialStats') {
-                    if (
-                        currentUserProfile!.socialStats ==
-                        this.usersToMatch![i].socialStats
-                    ) {
-                        this.totalScore += 10;
-                    } else {
-                        this.totalScore += 1;
-                    }
-                } else if (attr === 'roomTemperature') {
-                    if (
-                        currentUserProfile!.roomTemperature ==
-                        this.usersToMatch![i].roomTemperature
-                    ) {
-                        this.totalScore += 10;
-                    } else {
-                        this.totalScore += 1;
-                    }
-                } else if (attr === 'visitorTolerance') {
-                    if (
-                        currentUserProfile!.visitorTolerance ==
-                        this.usersToMatch![i].visitorTolerance
-                    ) {
-                        this.totalScore += 10;
-                    } else {
-                        this.totalScore += 1;
-                    }
-                } else if (attr === 'course') {
-                    if (
-                        currentUserProfile!.course ==
-                        this.usersToMatch![i].course
-                    ) {
-                        this.totalScore += 10;
-                    } else {
-                        this.totalScore += 1;
-                    }
-                } else if (attr === 'campusBudget') {
-                    if (
-                        currentUserProfile!.campusBudget ==
-                        this.usersToMatch![i].campusBudget
-                    ) {
-                        this.totalScore += 10;
-                    } else {
-                        this.totalScore += 1;
-                    }
-                } else if (attr === 'campusPreference') {
-                    if (
-                        currentUserProfile!.campusPreference ==
-                        this.usersToMatch![i].campusPreference
-                    ) {
-                        this.totalScore += 10;
-                    } else {
-                        this.totalScore += 1;
-                    }
-                } else if (attr === 'sportChoice') {
-                    if (
-                        currentUserProfile!.sportChoice ==
-                        this.usersToMatch![i].sportChoice
-                    ) {
-                        this.totalScore += 10;
-                    } else {
-                        this.totalScore += 1;
-                    }
+                        if (ageDiff < 3) {
+                            this.totalScore += 10;
+                        } else if (ageDiff < 5) {
+                            this.totalScore += 5;
+                        } else {
+                            this.totalScore += 1;
+                        }
+                        break;
+                    case 'male':
+                        if (this.usersToMatch![i].gender === 'male') {
+                            this.totalScore += 10;
+                        } else {
+                            this.totalScore += 1;
+                        }
+                    case 'female':
+                        if (this.usersToMatch![i].gender === 'female') {
+                            this.totalScore += 10;
+                        } else {
+                            this.totalScore += 1;
+                        }
+                    case 'interests':
+                        const sharedInterests =
+                            currentUserProfile!.interests.filter(
+                                (interest: any) =>
+                                    this.usersToMatch![i].interests.includes(
+                                        interest
+                                    )
+                            );
+                        const interestScore =
+                            sharedInterests.length /
+                            Math.max(
+                                currentUserProfile!.interests.length,
+                                this.usersToMatch![i].interests.length
+                            );
+                        this.totalScore += Math.round(interestScore * 10);
+                        break;
+
+                    case 'country':
+                        if (
+                            currentUserProfile!.country ==
+                            this.usersToMatch![i].country
+                        ) {
+                            this.totalScore += 10;
+                        } else {
+                            this.totalScore += 1;
+                        }
+                        break;
+                    case 'socailStats':
+                        if (
+                            currentUserProfile!.socialStats ==
+                            this.usersToMatch![i].socialStats
+                        ) {
+                            this.totalScore += 10;
+                        } else {
+                            this.totalScore += 1;
+                        }
+                        break;
+                    case 'roomTemperature':
+                        if (
+                            currentUserProfile!.roomTemperature ==
+                            this.usersToMatch![i].roomTemperature
+                        ) {
+                            this.totalScore += 10;
+                        } else {
+                            this.totalScore += 1;
+                        }
+                        break;
+                    case 'visitorTolerance':
+                        if (
+                            currentUserProfile!.visitorTolerance ==
+                            this.usersToMatch![i].visitorTolerance
+                        ) {
+                            this.totalScore += 10;
+                        } else {
+                            this.totalScore += 1;
+                        }
+                        break;
+                    case 'course':
+                        if (
+                            currentUserProfile!.course ==
+                            this.usersToMatch![i].course
+                        ) {
+                            this.totalScore += 10;
+                        } else {
+                            this.totalScore += 1;
+                        }
+                        break;
+                    case 'campusBudget':
+                        if (
+                            currentUserProfile!.campusBudget ==
+                            this.usersToMatch![i].campusBudget
+                        ) {
+                            this.totalScore += 10;
+                        } else {
+                            this.totalScore += 1;
+                        }
+                        break;
+                    case 'campusPreference':
+                        if (
+                            currentUserProfile!.campusPreference ==
+                            this.usersToMatch![i].campusPreference
+                        ) {
+                            this.totalScore += 10;
+                        } else {
+                            this.totalScore += 1;
+                        }
+                    case 'sportChoice':
+                        if (
+                            currentUserProfile!.sportChoice ==
+                            this.usersToMatch![i].sportChoice
+                        ) {
+                            this.totalScore += 10;
+                        } else {
+                            this.totalScore += 1;
+                        }
+                    default:
+                        break;
                 }
             });
 
